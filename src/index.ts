@@ -1,5 +1,10 @@
-export const example = (): string => 'test string';
+import { Repository } from './models/repository';
+import client from './client';
+
+export const getReposByUser = async (username: string): Promise<Repository[]> => (
+  client.getRepos(username)
+);
 
 export default {
-  example,
+  getReposByUser,
 };

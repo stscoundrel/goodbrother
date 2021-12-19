@@ -1,14 +1,11 @@
-import exampleModule from '../src';
+import { getReposByUser } from '../src';
 
-describe('Example tests', () => {
-  test('Test suite runs', () => {
-    expect(true).toBeTruthy();
-    expect(false).toBeFalsy();
-  });
+describe('Goodbrother test suite', () => {
+  test('Gets repos by user', async () => {
+    const result = await getReposByUser('stscoundrel');
 
-  test('Example function returns correct string', () => {
-    const result = exampleModule.example();
+    console.log(result);
 
-    expect(result).toBe('test string');
+    expect(result.length > 0).toBeTruthy();
   });
 });
