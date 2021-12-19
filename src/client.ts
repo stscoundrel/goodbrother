@@ -10,10 +10,24 @@ const toRepository = (repositoryResponse): Repository => ({
 });
 
 const getRepos = async (username: string): Promise<Repository[]> => {
-  const response = await axios.get(`${API_URL}/${username}/repos?page=1&per_page=100`);
-  const result = response.data as RepositoryResponse[];
+  const repos: RepositoryResponse[] = [];
+  let hasMoreRepos = true;
+  let page = 1;
 
-  return result.map((repository) => toRepository(repository as RepositoryResponse));
+  while (hasMoreRepos) {
+    // eslint-disable-next-line no-await-in-loop
+    const response = await axios.get(`${API_URL}/${username}/repos?page=${page}&per_page=100`);
+    const responseRepos = response.data as RepositoryResponse[];
+    repos.push(...responseRepos);
+
+    if (responseRepos.length === 100) {
+      page += 1;
+    } else {
+      hasMoreRepos = false;
+    }
+  }
+
+  return repos.map((repository) => toRepository(repository as RepositoryResponse));
 };
 
 export default {
