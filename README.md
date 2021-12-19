@@ -1,10 +1,14 @@
-# TypeScript Template
+# Goodbrother
 
-Template repo for generic TypeScript / Node.js library with tests &amp; lint
+List open PRs in Github by user.
+
+## Motivation
+
+If you have many repos that receive regular ugrades with Dependabot, you're simply likely to miss some of thme. Goodbrother is there to let me know if I still have some open.
 
 ### Install
 
-`yarn add name-of-the-package`
+`yarn add goodbrother`
 
 ##### Usage
 
