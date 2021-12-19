@@ -8,4 +8,5 @@ export interface RepositoryResponse {
   id: string,
   name: string,
   full_name: string,
+  fork: boolean,
 }

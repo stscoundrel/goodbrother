@@ -27,7 +27,9 @@ const getRepos = async (username: string): Promise<Repository[]> => {
     }
   }
 
-  return repos.map((repository) => toRepository(repository as RepositoryResponse));
+  return repos
+    .filter((repo) => !repo.fork)
+    .map((repository) => toRepository(repository as RepositoryResponse));
 };
 
 export default {
