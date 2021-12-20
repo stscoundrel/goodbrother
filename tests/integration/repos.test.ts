@@ -1,4 +1,4 @@
-import { getReposByUser } from '../src';
+import { getReposByUser } from '../../src';
 
 describe('Goodbrother test suite', () => {
   test('Gets repos by user', async () => {
