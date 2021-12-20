@@ -14,22 +14,26 @@ const getRepos = async (username: string): Promise<Repository[]> => {
   let hasMoreRepos = true;
   let page = 1;
 
-  while (hasMoreRepos) {
+  try {
+    while (hasMoreRepos) {
     // eslint-disable-next-line no-await-in-loop
-    const response = await axios.get(`${API_URL}/${username}/repos?page=${page}&per_page=100`);
-    const responseRepos = response.data as RepositoryResponse[];
-    repos.push(...responseRepos);
+      const response = await axios.get(`${API_URL}/${username}/repos?page=${page}&per_page=100`);
+      const responseRepos = response.data as RepositoryResponse[];
+      repos.push(...responseRepos);
 
-    if (responseRepos.length === 100) {
-      page += 1;
-    } else {
-      hasMoreRepos = false;
+      if (responseRepos.length === 100) {
+        page += 1;
+      } else {
+        hasMoreRepos = false;
+      }
     }
-  }
 
-  return repos
-    .filter((repo) => !repo.fork)
-    .map((repository) => toRepository(repository as RepositoryResponse));
+    return repos
+      .filter((repo) => !repo.fork)
+      .map((repository) => toRepository(repository as RepositoryResponse));
+  } catch (e) {
+    throw new Error(`Could not list repos for user ${username}. Faced error: ${e.message}`);
+  }
 };
 
 export default {
