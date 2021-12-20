@@ -14,7 +14,9 @@
   "engines": {
     "node": ">=12.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
@@ -37,8 +39,9 @@
     "lint": "eslint .",
     "fix": "eslint . --fix",
     "jest": "jest --verbose --runInBand --passWithNoTests",
-    "test:unit": "yarn jest",
-    "test:coverage": "jest --coverage --coverageThreshold='{\"global\":{\"statements\":\"90\", \"functions\":\"90\", \"branches\":\"90\", \"lines\":\"90\"}}'",
+    "test:unit": "yarn jest tests/unit",
+    "test:integration": "yarn jest tests/integration",
+    "test:coverage": "jest tests/unit --coverage --coverageThreshold='{\"global\":{\"statements\":\"90\", \"functions\":\"90\", \"branches\":\"90\", \"lines\":\"90\"}}'",
     "build": "tsc",
     "prepublishOnly": "yarn build && yarn test:unit"
   }
