@@ -41,7 +41,7 @@
     "jest": "jest --verbose --runInBand --passWithNoTests",
     "test:unit": "yarn jest tests/unit",
     "test:integration": "yarn jest tests/integration",
-    "test:coverage": "jest --coverage --coverageThreshold='{\"global\":{\"statements\":\"90\", \"functions\":\"90\", \"branches\":\"90\", \"lines\":\"90\"}}'",
+    "test:coverage": "jest tests/unit --coverage --coverageThreshold='{\"global\":{\"statements\":\"90\", \"functions\":\"90\", \"branches\":\"90\", \"lines\":\"90\"}}'",
     "build": "tsc",
     "prepublishOnly": "yarn build && yarn test:unit"
   }
