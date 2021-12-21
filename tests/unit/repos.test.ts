@@ -6,7 +6,7 @@ jest.mock('axios');
 
 describe('Goodbrother test suite', () => {
   beforeEach(() => {
-    axios.mockRestore();
+    axios.get.mockRestore();
   });
 
   test('Processes repo response to repository models', async () => {
@@ -52,6 +52,11 @@ describe('Goodbrother test suite', () => {
 
     // 100 + 100 + 26 repos.
     expect(results.length).toBe(226);
+
+    // Should've called API with incrementing pagination param.
+    expect(axios.get.mock.calls[0][0]).toBe('https://api.github.com/users/stscoundrel/repos?page=1&per_page=100');
+    expect(axios.get.mock.calls[1][0]).toBe('https://api.github.com/users/stscoundrel/repos?page=2&per_page=100');
+    expect(axios.get.mock.calls[2][0]).toBe('https://api.github.com/users/stscoundrel/repos?page=3&per_page=100');
   });
 
   test('Errors if GH api fails', async () => {
