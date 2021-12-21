@@ -4,7 +4,7 @@ import { getPullRequests } from '../../src';
 
 jest.mock('axios');
 
-describe('Goodbrother test suite', () => {
+describe('Goodbrother PR tests', () => {
   beforeEach(() => {
     axios.mockRestore();
   });

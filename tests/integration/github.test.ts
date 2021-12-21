@@ -1,6 +1,6 @@
 import { getReposByUser, getPullRequests } from '../../src';
 
-describe('Goodbrother test suite', () => {
+describe('Goodbrother integration test suite', () => {
   test('Gets repos by user', async () => {
     const result = await getReposByUser('stscoundrel');
 
