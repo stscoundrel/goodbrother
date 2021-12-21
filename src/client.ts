@@ -1,21 +1,10 @@
 import axios from 'axios';
 import { PullRequest, PullRequestResponse } from './models/pull-request';
 import { Repository, RepositoryResponse } from './models/repository';
+import { fromRepositoryResponse } from './mappers/repository';
+import { fromPullRequestResponse } from './mappers/pull-requests';
 
 const API_URL = 'https://api.github.com';
-
-const toRepository = (repositoryResponse): Repository => ({
-  id: repositoryResponse.id,
-  name: repositoryResponse.name,
-  path: repositoryResponse.full_name,
-});
-
-const toPullRequest = (pullRequestResponse): PullRequest => ({
-  id: pullRequestResponse.id,
-  name: pullRequestResponse.title,
-  link: pullRequestResponse.html_url,
-  isDependabot: pullRequestResponse.user.login.includes('dependabot'),
-});
 
 const getRepos = async (username: string): Promise<Repository[]> => {
   const repos: RepositoryResponse[] = [];
@@ -38,7 +27,7 @@ const getRepos = async (username: string): Promise<Repository[]> => {
 
     return repos
       .filter((repo) => !repo.fork)
-      .map((repository) => toRepository(repository as RepositoryResponse));
+      .map((repository) => fromRepositoryResponse(repository));
   } catch (e) {
     throw new Error(`Could not list repos for user ${username}. Faced error: ${e.message}`);
   }
@@ -50,7 +39,7 @@ const getPullRequests = async (repository: string) : Promise<PullRequest[]> => {
     const responsePRs = response.data as PullRequestResponse[];
 
     return responsePRs
-      .map((pullRequest) => toPullRequest(pullRequest));
+      .map((pullRequest) => fromPullRequestResponse(pullRequest));
   } catch (e) {
     throw new Error(`Could not list PRs for repo ${repository}. Faced error: ${e.message}`);
   }

@@ -4,7 +4,7 @@ import { getReposByUser } from '../../src';
 
 jest.mock('axios');
 
-describe('Goodbrother test suite', () => {
+describe('Goodbrother repository tests', () => {
   beforeEach(() => {
     axios.get.mockRestore();
   });
