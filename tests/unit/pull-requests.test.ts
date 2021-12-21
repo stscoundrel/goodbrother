@@ -20,7 +20,7 @@ describe('Goodbrother test suite', () => {
 
     expect(results[0].name).toBe('Bump next-pwa from 5.4.0 to 5.4.4');
     expect(results[0].link).toBe('https://github.com/stscoundrel/runes/pull/108');
-    expect(results[0].isDependabot).toBeTruthy()
+    expect(results[0].isDependabot).toBeTruthy();
 
     expect(results.length).toBe(13);
   });
