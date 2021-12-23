@@ -1,4 +1,4 @@
-import { getReposByUser, getPullRequests } from '../../src';
+import { getReposByUser, getPullRequestsByRepository } from '../../src';
 
 describe('Goodbrother integration test suite', () => {
   test('Gets repos by user', async () => {
@@ -9,7 +9,7 @@ describe('Goodbrother integration test suite', () => {
 
   test('Gets PRs by Repo', async () => {
     // TODO: switch to dummy Goodbrother PR when public.
-    const result = await getPullRequests('stscoundrel/runes');
+    const result = await getPullRequestsByRepository('stscoundrel/runes');
 
     expect(result.length > 0).toBeTruthy();
   });

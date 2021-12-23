@@ -33,7 +33,7 @@ const getRepos = async (username: string): Promise<Repository[]> => {
   }
 };
 
-const getPullRequests = async (repository: string) : Promise<PullRequest[]> => {
+const getPullRequestsByRepository = async (repository: string) : Promise<PullRequest[]> => {
   try {
     const response = await axios.get(`${API_URL}/repos/${repository}/pulls`);
     const responsePRs = response.data as PullRequestResponse[];
@@ -47,5 +47,5 @@ const getPullRequests = async (repository: string) : Promise<PullRequest[]> => {
 
 export default {
   getRepos,
-  getPullRequests,
+  getPullRequestsByRepository,
 };
