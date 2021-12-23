@@ -7,6 +7,7 @@ export interface PullRequest {
   name: string,
   link: string,
   isDependabot: boolean,
+  repository: string,
 }
 
 export interface PullRequestResponse {
@@ -14,4 +15,22 @@ export interface PullRequestResponse {
   title: string,
   user: PullRequestUser,
   html_url: string,
+  base: {
+    repo: {
+      full_name: string,
+    }
+  }
+}
+
+export interface PullRequestSearchResponse {
+  id: string,
+  title: string,
+  user: PullRequestUser,
+  html_url: string,
+  repository_url: string,
+}
+
+export interface PullRequestSearchResponses {
+  total_count: number,
+  items: PullRequestSearchResponse[],
 }

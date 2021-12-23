@@ -6,10 +6,16 @@ export const getReposByUser = async (username: string): Promise<Repository[]> =>
   client.getRepos(username)
 );
 
-export const getPullRequests = async (repository: string): Promise<PullRequest[]> => (
-  client.getPullRequests(repository)
+export const getPullRequestsByRepository = async (repository: string): Promise<PullRequest[]> => (
+  client.getPullRequestsByRepository(repository)
+);
+
+export const getPullRequestsByUser = async (username: string): Promise<PullRequest[]> => (
+  client.getPullRequestsByUser(username)
 );
 
 export default {
   getReposByUser,
+  getPullRequestsByRepository,
+  getPullRequestsByUser,
 };
