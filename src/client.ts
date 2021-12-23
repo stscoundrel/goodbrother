@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { PullRequest, PullRequestResponse } from './models/pull-request';
+import { PullRequest, PullRequestResponse, PullRequestSearchResponses } from './models/pull-request';
 import { Repository, RepositoryResponse } from './models/repository';
 import { fromRepositoryResponse } from './mappers/repository';
-import { fromPullRequestResponse } from './mappers/pull-requests';
+import { fromPullRequestResponse, fromPullRequestSearchResponse } from './mappers/pull-requests';
 
 const API_URL = 'https://api.github.com';
 
@@ -45,7 +45,20 @@ const getPullRequestsByRepository = async (repository: string) : Promise<PullReq
   }
 };
 
+const getPullRequestsByUser = async (username: string) : Promise<PullRequest[]> => {
+  try {
+    const response = await axios.get(`${API_URL}/search/issues?q=user:${username}+is:pr+state:open`);
+    const responsePRs = response.data as PullRequestSearchResponses;
+
+    return responsePRs.items
+      .map((pullRequest) => fromPullRequestSearchResponse(pullRequest));
+  } catch (e) {
+    throw new Error(`Could not list PRs for user ${username}. Faced error: ${e.message}`);
+  }
+};
+
 export default {
   getRepos,
   getPullRequestsByRepository,
+  getPullRequestsByUser,
 };

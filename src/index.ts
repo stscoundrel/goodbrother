@@ -10,6 +10,12 @@ export const getPullRequestsByRepository = async (repository: string): Promise<P
   client.getPullRequestsByRepository(repository)
 );
 
+export const getPullRequestsByUser = async (username: string): Promise<PullRequest[]> => (
+  client.getPullRequestsByUser(username)
+);
+
 export default {
   getReposByUser,
+  getPullRequestsByRepository,
+  getPullRequestsByUser,
 };
