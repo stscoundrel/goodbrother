@@ -10,18 +10,6 @@ export interface PullRequest {
   repository: string,
 }
 
-export interface PullRequestResponse {
-  id: string,
-  title: string,
-  user: PullRequestUser,
-  html_url: string,
-  base: {
-    repo: {
-      full_name: string,
-    }
-  }
-}
-
 export interface PullRequestSearchResponse {
   id: string,
   title: string,
