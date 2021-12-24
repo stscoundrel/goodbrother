@@ -25,7 +25,7 @@ describe('Goodbrother PR tests', () => {
     expect(results.length).toBe(16);
   });
 
-  test('By repos: prrors if GH api fails', async () => {
+  test('By user: prrors if GH api fails', async () => {
     axios.get
       .mockImplementationOnce(() => { throw new Error('GH sucks today'); });
 
