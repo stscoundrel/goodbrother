@@ -1,5 +1,4 @@
 import axios from 'axios';
-import mockPResponse from '../fixtures/pr-response.json';
 import mockPrSearchResponse from '../fixtures/pr-search-response.json';
 import { getPullRequestsByUser, groupPullRequestsByRepository } from '../../src';
 
