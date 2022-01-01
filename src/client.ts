@@ -6,7 +6,7 @@ const API_URL = 'https://api.github.com';
 
 const getPullRequestsByUser = async (username: string) : Promise<PullRequest[]> => {
   try {
-    const response = await axios.get(`${API_URL}/search/issues?q=user:${username}+is:pr+state:open`);
+    const response = await axios.get(`${API_URL}/search/issues?q=user:${username}+is:pr+state:open&per_page=100`);
     const responsePRs = response.data as PullRequestSearchResponses;
 
     return responsePRs.items
