@@ -43,6 +43,8 @@ describe('Goodbrother PR tests', () => {
     const expected = [
       {
         name: 'stscoundrel/runes',
+        link: 'https://github.com/stscoundrel/runes',
+        count: 13,
         pullRequests: [
           {
             id: 1075530244,
@@ -139,6 +141,8 @@ describe('Goodbrother PR tests', () => {
       },
       {
         name: 'stscoundrel/gatsby-source-plugin-zoega',
+        link: 'https://github.com/stscoundrel/gatsby-source-plugin-zoega',
+        count: 1,
         pullRequests: [
           {
             id: 1068208284,
@@ -151,6 +155,8 @@ describe('Goodbrother PR tests', () => {
       },
       {
         name: 'stscoundrel/gatsby-source-cleasby-vigfusson',
+        link: 'https://github.com/stscoundrel/gatsby-source-cleasby-vigfusson',
+        count: 1,
         pullRequests: [
           {
             id: 1067800663,
@@ -163,6 +169,8 @@ describe('Goodbrother PR tests', () => {
       },
       {
         name: 'stscoundrel/bower',
+        link: 'https://github.com/stscoundrel/bower',
+        count: 1,
         pullRequests: [
           {
             id: 874776617,
