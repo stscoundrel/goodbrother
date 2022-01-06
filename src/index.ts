@@ -10,9 +10,12 @@ export const groupPullRequestsByRepository = (pullRequests: PullRequest[])
   pullRequests.forEach((pullRequest) => repositories.add(pullRequest.repository));
 
   repositories.forEach((repository: string) => {
+    const pulls = pullRequests.filter((pullRequest) => pullRequest.repository === repository);
     const summary = {
       name: repository,
-      pullRequests: pullRequests.filter((pullRequest) => pullRequest.repository === repository),
+      link: `https://github.com/${repository}`,
+      count: pulls.length,
+      pullRequests: pulls,
     };
 
     summaries.push(summary);
