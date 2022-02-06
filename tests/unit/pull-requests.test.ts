@@ -6,7 +6,7 @@ jest.mock('axios');
 
 describe('Goodbrother PR tests', () => {
   beforeEach(() => {
-    axios.mockRestore();
+    axios.get.mockRestore();
   });
 
   test('By user: processes search response to pull request models', async () => {
@@ -25,7 +25,7 @@ describe('Goodbrother PR tests', () => {
     expect(results.length).toBe(16);
   });
 
-  test('By user: prrors if GH api fails', async () => {
+  test('By user: errors if GH api fails', async () => {
     axios.get
       .mockImplementationOnce(() => { throw new Error('GH sucks today'); });
 
@@ -184,5 +184,37 @@ describe('Goodbrother PR tests', () => {
     ];
 
     expect(result).toEqual(expected);
+  });
+
+  test('Paginates response, if more pages available', async () => {
+    /**
+     * Mock search api response, that claims to have 203 results.
+     * It's same response each time, we just expect to fetch it thrice.
+     */
+    const mockPaginatedResponse = { ...mockPrSearchResponse };
+
+    // Fill fixture with 100 copies of same PR.
+    const fixturePR = mockPrSearchResponse.items[0];
+    mockPaginatedResponse.items = [];
+
+    // Claim to have 203 results.
+    mockPaginatedResponse.total_count = 203;
+
+    for (let i = 0; i < 100; i += 1) {
+      mockPaginatedResponse.items.push(fixturePR);
+    }
+
+    axios.get.mockImplementation(() => Promise.resolve({ data: mockPaginatedResponse }));
+
+    const result = await getPullRequestsByUser('stscoundrel');
+
+    // Assert API received three calls with increasing paged value
+    expect(axios.get).toHaveBeenCalledTimes(3);
+    expect(axios.get.mock.calls[0][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100&page=1');
+    expect(axios.get.mock.calls[1][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100&page=2');
+    expect(axios.get.mock.calls[2][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100&page=3');
+
+    // Assert we received all items from responses.
+    expect(result.length).toEqual(mockPaginatedResponse.items.length * 3);
   });
 });
