@@ -13,7 +13,7 @@ const getPullRequestsByUser = async (username: string) : Promise<PullRequest[]> 
   while (hasMoreResults && page <= MAX_REQUESTS) {
     try {
       // eslint-disable-next-line no-await-in-loop
-      const response = await axios.get(`${API_URL}/search/issues?q=user:${username}+is:pr+state:open&per_page=100&page=${page}`);
+      const response = await axios.get(`${API_URL}/search/issues?q=user:${username}+is:pr+state:open+archived:false&per_page=100&page=${page}`);
       const responsePRs = response.data as PullRequestSearchResponses;
 
       items.push(
