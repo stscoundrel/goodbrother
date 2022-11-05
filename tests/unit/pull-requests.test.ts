@@ -210,9 +210,9 @@ describe('Goodbrother PR tests', () => {
 
     // Assert API received three calls with increasing paged value
     expect(axios.get).toHaveBeenCalledTimes(3);
-    expect(axios.get.mock.calls[0][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100&page=1');
-    expect(axios.get.mock.calls[1][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100&page=2');
-    expect(axios.get.mock.calls[2][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100&page=3');
+    expect(axios.get.mock.calls[0][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open+archived:false&per_page=100&page=1');
+    expect(axios.get.mock.calls[1][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open+archived:false&per_page=100&page=2');
+    expect(axios.get.mock.calls[2][0]).toEqual('https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open+archived:false&per_page=100&page=3');
 
     // Assert we received all items from responses.
     expect(result.length).toEqual(mockPaginatedResponse.items.length * 3);
