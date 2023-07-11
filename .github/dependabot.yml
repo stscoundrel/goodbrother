@@ -15,3 +15,7 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 25
+    groups:
+       ci-dependencies:
+          patterns:
+            - "*" # Match all dependencies to one PR.
